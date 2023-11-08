@@ -105,13 +105,14 @@ export const CloseXimage = styled.img`
   flex-shrink: 0;
 `;
 export const Texting = styled.div`
-  color: var(--cool-gray-90, #21272a);
+  /* color: var(--cool-gray-90, #21272a); */
   font-family: Roboto;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-style: normal;
   font-weight: 400;
   line-height: 140%; /* 19.6px */
   font-family: Roboto;
+
   &#NoneBox {
     margin-top: 0.4rem;
     margin-left: 0.5rem;

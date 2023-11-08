@@ -93,7 +93,7 @@ export function CreateClubBottom() {
     // 객체가 잘 저장되었는지 확인해보기
 
     customAxios //api post 예시
-      .post("/adfs", formData) //여기에 pst주소입력
+      .post("http://13.125.162.181:8084/clubs/new", formData) //저장확인 잘 됨
       .then((res) => {
         console.log("저장 완료");
       })

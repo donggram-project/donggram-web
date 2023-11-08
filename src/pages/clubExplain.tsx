@@ -28,7 +28,7 @@ export default function ClubExplain() {
   function fetchClubData(clubId) {
     // clubId의 숫자에 따라 각각 다른 동아리 정보 출력
     customAxios
-      .get(`http://13.125.162.181:8080/clubs/${clubId}`)
+      .get(`http://13.125.162.181:8084/clubs/${clubId}`) //8084으로 바꿔보라함
       .then((res) => {
         setClubData(res.data.data);
       })

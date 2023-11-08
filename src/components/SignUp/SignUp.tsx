@@ -45,7 +45,7 @@ export function SignUp({ signUpModal, toggleSignUp, toggleSignIn }: Modal) {
     };
 
     axios //api post 예시
-      .post("http://13.125.162.181:8080/join", formData)
+      .post("http://13.125.162.181:8084/join", formData) //8084으로 바꿔보라해서 바꿔봄
       .then((res) => {
         console.log("저장 완료");
         toggleSignUp();

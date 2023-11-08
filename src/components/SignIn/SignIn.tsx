@@ -39,7 +39,7 @@ export function SignIn({
       password: pw,
     };
     axios //api post 예시
-      .post("http://13.125.162.181:8080/login", formData)
+      .post("http://13.125.162.181:8084/login", formData) // 8084으로 바꿔보라해서 바꿔봄
       .then((res) => {
         const Token = res.data.data;
         axios.defaults.headers.common["Access_Token"] = `${Token.accessToken}`;

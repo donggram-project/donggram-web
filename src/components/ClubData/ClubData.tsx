@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useCallback } from "react";
+
+import { customAxios } from "@/Utils/customAxios";
 import clubimage from "@/../public/placeholder.png";
 import {
   DetailExplainText,
@@ -18,6 +20,19 @@ import {
 } from "./ClubData.styled";
 
 const ClubData = ({ clubData }) => {
+  const onSubmit = useCallback(() => {
+    console.log(clubData.clubId);
+    customAxios
+      .post(`http://13.125.162.181:8084/clubs/${clubData.clubId}/join`) //formdata를 보내는 걸 추가를 어떻게 할까, CreateClubBottom 참고
+
+      .then((res) => {
+        console.log("신청 완료");
+      })
+      .catch((error) => {
+        console.log("신청 실패");
+        console.log(error);
+      });
+  }, [clubData]);
   return (
     <>
       <DetailExplainText>상세설명</DetailExplainText>
@@ -62,7 +77,7 @@ const ClubData = ({ clubData }) => {
                 {clubData.recruitmentPeriod}
               </ClubExplainTextBlack>
             </ClubDetailExplain>
-            <RegisterButton>신청하기</RegisterButton>
+            <RegisterButton onClick={onSubmit}>신청하기</RegisterButton>
             {/* onClick={onSubmit} 추가하기 */}
           </ClubExplainContainer>
         </div>

@@ -16,7 +16,7 @@ export const removeCookie = (name: string) => {
 };
 
 export const customAxios = axios.create({
-  baseURL: "http://13.125.162.181:8080",
+  baseURL: "http://13.125.162.181:8084", //8084으로 바꿔보라함
 });
 
 customAxios.interceptors.request.use(
@@ -45,13 +45,14 @@ customAxios.interceptors.response.use(
       config,
       response: { status },
     } = error;
+
     //401 = 토큰 만료
     if (status == 401) {
       const originRequest = config;
       //refreshToken
       const refreshToken = getCookie("refreshToken");
       const response = await axios.post(
-        "http://13.125.162.181:8080/refreshToken",
+        "http://13.125.162.181:8084/refreshToken", // 8084으로바꿔보라함
         {},
         {
           headers: {
