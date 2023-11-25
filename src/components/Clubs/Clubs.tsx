@@ -148,9 +148,6 @@ export const Clubs = ({
     customAxios
       .get(`clubs?collegeIds=${collegeIds}&divisionIds=${divisionIds}`)
       .then((response) => {
-        console.log(
-          `clubs?collegeIds=${collegeIds}&divisionIds=${divisionIds}`
-        );
         setClubData(response.data.data);
       })
       .catch((error) => {
