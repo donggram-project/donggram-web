@@ -63,10 +63,14 @@ export const ClubRow = styled.div`
 export const ClubRow2 = styled.div`
   margin-bottom: 3rem;
 `;
-export const ClubImage = styled(Image)`
+export const ClubImage = styled.img`
   width: 19.6rem;
   height: 22.2rem;
-  margin-bottom: 5.6rem;
+  border: 2px solid #c1c7cd;
+`;
+export const Placeholder = styled(Image)`
+  width: 19.6rem;
+  height: 22.2rem;
 `;
 export const CheckBox = styled.input`
   width: 1.6rem;

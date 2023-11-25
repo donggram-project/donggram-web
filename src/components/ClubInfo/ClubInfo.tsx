@@ -30,6 +30,7 @@ import {
   Save,
   ClubTab,
   PendingButtons,
+  Placeholder,
 } from "./ClubInfo.styled";
 import { customAxios } from "@/Utils/customAxios";
 import { AdminClubHeader } from "../AdminClubHeader/AdminClubHeader";
@@ -38,6 +39,7 @@ import { AdminClubMemberManageTable } from "../AdminClubMemberManageTable/AdminC
 interface DataRow {
   clubId: string;
   clubName: string;
+  clubImage: string;
   admin: string;
   clubCreated: string;
   college: string;
@@ -189,6 +191,7 @@ export const ClubInfo = ({
     customAxios
       .get(`admin/clubs/${ClickedId}`)
       .then((response) => {
+        console.log(response.data.data);
         if (response.data.data.clubCreated == null) {
           response.data.data.clubCreated = "-";
         }
@@ -207,6 +210,15 @@ export const ClubInfo = ({
       });
   }, [ClickedId, club?.recruitmentPeriod, ClickedStatus]);
 
+  const PrintImage = useCallback(() => {
+    if (changedClub) {
+      if (changedClub.clubImage) {
+        return <ClubImage src={changedClub.clubImage} alt="userImage" />;
+      }
+    }
+    return <Placeholder src={placeholder} alt="userImage" priority />;
+  }, [changedClub]);
+
   return changedClub ? (
     isClubInfo ? (
       ClickedStatus != "approve" ? (
@@ -216,7 +228,7 @@ export const ClubInfo = ({
             setIsClubInfo={setIsClubInfo}
           />
           <ClubContainer>
-            <ClubImage src={placeholder} alt="ClubImage" />
+            <PrintImage />
             <Body>
               <ClubCol>
                 <ClubRow>
@@ -311,7 +323,7 @@ export const ClubInfo = ({
             setIsClubInfo={setIsClubInfo}
           />
           <ClubContainer>
-            <ClubImage src={placeholder} alt="ClubImage" />
+            <PrintImage />
             <Body>
               <ClubCol>
                 <ClubRow>
@@ -414,7 +426,7 @@ export const ClubInfo = ({
     <ClubTab>
       <AdminClubHeader isClubInfo={isClubInfo} setIsClubInfo={setIsClubInfo} />
       <ClubContainer>
-        <ClubImage src={placeholder} alt="ClubImage" />
+        <PrintImage />
         <Body>
           <ClubCol>
             <ClubRow>
