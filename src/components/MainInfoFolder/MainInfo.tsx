@@ -62,28 +62,37 @@ export function MainInfo() {
     console.log("Photo = ", imageSrc);
 
     const formData = new FormData();
-    const value = [
-      {
-        studentId: userData.studentId,
-        memberName: userData.memberName,
-        major1: userData.major1,
-      },
-    ];
-    const blob = new Blob([JSON.stringify(value)], {
-      type: "application/json",
-    });
-    formData.append("data", blob); // 또는  formData.append("data", JSON.stringify(value)); // JSON 형식으로 파싱.(백엔드의 요청에 따라 전송방식이 달라진다.)
+
+    if (imageSrc) {
+      // 이미지 파일이 있는 경우에만 formData에 추가
+      const imageData = dataURItoBlob(imageSrc);
+      formData.append("profileImage", imageData, "profileImage.jpg");
+    } else {
+      const emptyBlob = new Blob();
+      formData.append("profileImage", emptyBlob, "profileImage.jpg");
+    }
+
     customAxios
-
       .put(`/member`, formData, {})
-
-
       .then(() => {
         console.log("put success");
         router.reload();
       })
       .catch((error) => console.error("Reason for error: ", error.response));
   }, [userData, imageSrc]);
+  // Data URI를 Blob으로 변환하는 함수
+  function dataURItoBlob(dataURI: string) {
+    const byteString = atob(dataURI.split(",")[1]);
+    const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ab], { type: mimeString });
+  }
 
   useEffect(() => {
     console.log("이름 = ", userData.memberName);
@@ -146,6 +155,7 @@ export function MainInfo() {
       </TextNImageContainer>
       <ImageUpLoad>
         <input
+          id="fileInput"
           accept="image/*"
           multiple
           type="file"

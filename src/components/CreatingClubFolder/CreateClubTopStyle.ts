@@ -86,3 +86,42 @@ export const ImageNTextConatiner = styled.div`
 export const PageContainer = styled.div`
   margin-left: -3.8rem;
 `;
+export const ImageUpLoad = styled.div`
+  justify-content: center;
+  display: flex;
+  margin-left: 64rem;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+`;
+export const ImageDelete = styled.div`
+  justify-content: center;
+  display: flex;
+  margin-left: 51rem;
+  margin-top: 1rem;
+`;
+export const DeleteButton = styled.label`
+  margin-left: -3.5rem;
+  width: 6rem;
+  height: 2rem;
+  padding-left: 1.1rem;
+  flex-shrink: 0;
+  color: #000;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 23.8px */
+  text-align: left;
+  border: 1px solid #000; /* Add a 1px solid black border */
+  border-radius: 2px;
+  background-color: #ececec;
+  font-size: 1.4rem;
+  /* 
+  cursor: pointer; */
+  &:hover {
+    background-color: #d9d9d9; /* 회색 배경색으로 변경 */
+    cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+    border-radius: 2px; /* 모서리를 10px만큼 둥글게 처리 */
+  }
+`;

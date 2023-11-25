@@ -17,7 +17,7 @@ import {
   CancelButton,
 } from "./CreateClubBottomStyle";
 
-export function CreateClubBottom() {
+export function CreateClubBottom({ imageSrc }: any) {
   const [clubNameInput, setClubNameInput] = useState(""); //input란
   const [clubIntroInput, setClubIntroInput] = useState(""); //input란 관리
   const [clubName, setClubName] = useState(""); // 동아리 이름
@@ -72,36 +72,68 @@ export function CreateClubBottom() {
     if (recruitDate === " ~ ") {
       setRecruitDate("");
     } // 기간을 설정 안했으면 기간을 공백으로 설정
-    //데이터 전송함수, 마지막 버튼에 작용시키면 됨
-    const formData = {
-      clubName: clubName,
+    // 데이터 전송함수, 마지막 버튼에 작용시키면 됨
+    const formData = new FormData();
+
+    if (imageSrc) {
+      // 이미지 파일이 존재하면 formData에 추가
+      const imageData = dataURItoBlob(imageSrc);
+      formData.append("ImageClub", imageData);
+    } else {
+      // 이미지 파일이 없으면 빈 Blob을 추가
+      const emptyBlob = new Blob();
+      formData.append("ImageClub", emptyBlob);
+    }
+    const isRecruitmentValue = onRecruit ? 1 : 0;
+    const value = {
       college: col,
-      major: maj,
-      department: dep,
-      onRecruit: onRecruit,
+      division: dep,
+      clubName: clubName,
+      content: clubIntroduction,
       recruitmentPeriod: recruitDate,
-      clubIntroduction: clubIntroduction,
+      isRecruitment: isRecruitmentValue.toString(),
     };
+    const blob = new Blob([JSON.stringify(value)], {
+      type: "application/json",
+    });
+    formData.append("newClubDto", blob); // 또는  formData.append("data", JSON.stringify(value)); // JSON 형식으로 파싱.(백엔드의 요청에 따라 전송방식이 달라진다.)
+    // formData.append("newClubDto", JSON.stringify(value));
+
     console.log("ㅡㅡㅡ제출ㅡㅡㅡ");
     console.log({ clubName });
     console.log({ col });
     console.log({ maj });
     console.log({ dep });
-    console.log({ onRecruit });
+    console.log({ isRecruitmentValue });
     console.log({ recruitDate });
     console.log({ clubIntroduction });
+    console.log("이미지 정보 : ", { imageSrc });
     // 객체가 잘 저장되었는지 확인해보기
 
     customAxios //api post 예시
-      .post("/clubs/new", formData) //저장확인 잘 됨
-      .then((res) => {
-        console.log("저장 완료");
+      .post("/clubs/new", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data", // Content-Type must be set to this.
+        },
       })
       .catch((error) => {
         console.log("저장 실패");
         console.log(error);
       });
   }, [clubName, col, maj, dep, onRecruit, recruitDate, clubIntroduction]);
+
+  function dataURItoBlob(dataURI: string) {
+    const byteString = atob(dataURI.split(",")[1]);
+    const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ab], { type: mimeString });
+  }
 
   return (
     <div>
