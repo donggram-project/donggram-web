@@ -36,7 +36,7 @@ export function MainInfo() {
     console.log("전공 =", userCollege);
     console.log("사진 = ", imageSrc);
     customAxios
-      .put(`http://13.125.162.181:8084/member/`, {
+      .put(`/member/`, {
         memberName: userName,
         studentId: userId,
         major1: userCollege,
