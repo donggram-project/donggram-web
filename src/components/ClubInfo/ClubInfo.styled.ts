@@ -77,7 +77,9 @@ export const CheckBox = styled.input`
   height: 1.6rem;
   border: 1px solid #121619;
 `;
-export const Body = styled.div``;
+export const Body = styled.div`
+  margin-top: 3rem;
+`;
 export const Delete = styled.button`
   width: 8.6rem;
   height: 2.9rem;
