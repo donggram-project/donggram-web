@@ -74,7 +74,6 @@ export function MainInfo() {
 
     customAxios
       .put(`/member`, formData, {})
-
       .then(() => {
         console.log("put success");
         router.reload();

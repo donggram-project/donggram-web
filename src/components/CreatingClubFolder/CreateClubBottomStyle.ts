@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-
-
 export const ClubNameInput = styled.input`
   width: 34.9rem;
   height: 4.5rem;
