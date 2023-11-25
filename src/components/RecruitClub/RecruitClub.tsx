@@ -83,7 +83,7 @@ export function RecruitClub({ displayNum }: ParentProps) {
       );
     });
   }, [filteredData]);
-  return lastPage === 0 ? (
+  return lastPage <= 0 ? (
     <PageContainer>
       <RecruitClubText>모집 중인 동아리</RecruitClubText>
       <Table>

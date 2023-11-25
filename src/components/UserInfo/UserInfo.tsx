@@ -139,10 +139,18 @@ export const UserInfo = ({ ClickedId }: ParentProps) => {
       .then(() => router.reload())
       .catch((error) => console.error("에러: ", error));
   }, [router, changedUser, ClickedId]);
+  const PrintImage = useCallback(() => {
+    if (changedUser) {
+      if (changedUser.profileImage) {
+        return <UserImage src={changedUser.profileImage} alt="userImage" />;
+      }
+    }
+    return <Placeholder src={placeholder} alt="userImage" priority />;
+  }, [changedUser]);
 
   return changedUser ? (
     <UserContainer>
-      <UserImage src={changedUser.profileImage} alt="userImage" />
+      <PrintImage />
       <Body>
         <Text>이름</Text>
         <Value
@@ -191,7 +199,7 @@ export const UserInfo = ({ ClickedId }: ParentProps) => {
     </UserContainer>
   ) : (
     <UserContainer>
-      <Placeholder src={placeholder} alt="userImage" priority />
+      <PrintImage />
       <Body>
         <Text>이름</Text>
         <Value value={"로딩 중..."} type="text" onChange={handleNameChange} />

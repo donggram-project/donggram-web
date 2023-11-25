@@ -33,6 +33,8 @@ const Boarder = styled.div`
 export default function ClubPage() {
   const [clickedIds, setClickedIds] = useState<number[]>([]);
   const [clickedDivision, setClickedDivision] = useState<number[]>([]);
+  const [idsAll, setIdsAll] = useState<number[]>([]);
+  const [divisionsAll, setDivisionsAll] = useState<number[]>([]);
   const [recruit, setRecruit] = useState(false);
   const handleCategoryClick = () => {
     setRecruit(!recruit);
@@ -67,6 +69,7 @@ export default function ClubPage() {
             fieldName="college"
             clickedIds={clickedIds}
             setClickedIds={setClickedIds}
+            setAll={setIdsAll}
           />
         </College>
         <Department>
@@ -75,12 +78,19 @@ export default function ClubPage() {
             fieldName="division"
             clickedIds={clickedDivision}
             setClickedIds={setClickedDivision}
+            setAll={setDivisionsAll}
           />
           <BigCategory props="모집 중" onCategoryClick={handleCategoryClick} />
         </Department>
       </div>
       <Boarder />
-      <Clubs ids={clickedIds} divisions={clickedDivision} recruit={recruit} />
+      <Clubs
+        ids={clickedIds}
+        divisions={clickedDivision}
+        recruit={recruit}
+        allIds={idsAll}
+        allDivisions={divisionsAll}
+      />
     </PageContainer>
   );
 }

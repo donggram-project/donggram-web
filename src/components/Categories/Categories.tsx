@@ -15,6 +15,7 @@ interface filePath {
   fieldName: string;
   clickedIds: number[];
   setClickedIds: Dispatch<SetStateAction<number[]>>;
+  setAll: Dispatch<SetStateAction<number[]>>;
 }
 
 function Categories({
@@ -22,6 +23,7 @@ function Categories({
   fieldName,
   clickedIds,
   setClickedIds,
+  setAll,
 }: filePath) {
   const [categories, setCategories] = useState<CategoryProps[]>([]);
 
@@ -31,11 +33,22 @@ function Categories({
       .then((response) => {
         const data = response.data.data;
         setCategories(data);
+        setAll(extractIds(data, fieldName));
       })
       .catch((error) => {
         console.error("에러 발생:", error);
       });
-  }, [filePath]);
+  }, [filePath, setAll, fieldName]);
+
+  function extractIds(data: any, type: string) {
+    return data.map((item: any) => {
+      if (type === "college") {
+        return item.collegeId;
+      } else if (type === "division") {
+        return item.divisionId;
+      }
+    });
+  }
 
   const handleCategoryClick = (id: number) => {
     var NewIds = [...clickedIds];

@@ -13,6 +13,8 @@ import { ClubTable, PageTab } from "./Clubs.styled";
 interface ParentProps {
   ids: number[];
   divisions: number[];
+  allIds: number[];
+  allDivisions: number[];
   recruit: boolean;
 }
 interface clubinfo {
@@ -23,7 +25,13 @@ interface clubinfo {
   recruitment: boolean;
 }
 
-export const Clubs = ({ ids, divisions, recruit }: ParentProps) => {
+export const Clubs = ({
+  ids,
+  divisions,
+  recruit,
+  allIds,
+  allDivisions,
+}: ParentProps) => {
   const [clubData, setClubData] = useState<clubinfo[]>([]);
   const [selectedClubs, setSelectedClubs] = useState<clubinfo[]>([]);
   //페이지
@@ -127,19 +135,22 @@ export const Clubs = ({ ids, divisions, recruit }: ParentProps) => {
     if (ids.length > 0) {
       setCollegeIds(ids.join(","));
     } else {
-      setCollegeIds("1,2,3,4,5,6,7,8,9");
+      setCollegeIds(allIds.join(","));
     }
     if (divisions.length > 0) {
       setDivisionIds(divisions.join(","));
     } else {
-      setDivisionIds("1,2,3,4,5,6,7");
+      setDivisionIds(allDivisions.join(","));
     }
-  }, [ids, divisions]);
+  }, [ids, divisions, allIds, allDivisions]);
 
   useEffect(() => {
     customAxios
       .get(`clubs?collegeIds=${collegeIds}&divisionIds=${divisionIds}`)
       .then((response) => {
+        console.log(
+          `clubs?collegeIds=${collegeIds}&divisionIds=${divisionIds}`
+        );
         setClubData(response.data.data);
       })
       .catch((error) => {
