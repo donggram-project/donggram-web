@@ -3,6 +3,7 @@ import clubimage from "@/../public/placeholder.png";
 import React, { useEffect, useState } from "react";
 import ClubTable from "./ClubTable";
 import { customAxios } from "@/Utils/customAxios";
+import { IsLogin } from "@/components/IsLogin/IsLogin";
 import {
   PageContainer,
   UserInfoText,
@@ -17,58 +18,89 @@ import {
   ImageUpLoad,
   PlaceholderImage,
   DeleteButton,
+  ImageDelete,
 } from "./MainInfoStyle";
 import { useCallback } from "react";
 import { useRouter } from "next/router";
 
+interface DataRow {
+  userData: {
+    memberName: string;
+    studentId: string;
+    major1: string;
+    clubList: [];
+  };
+}
+
 export function MainInfo() {
   const router = useRouter();
-  const [userData, setUserData] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userId, setUserId] = useState("");
-  const [userCollege, setUserCollege] = useState("");
+  const [userData, setUserData] = useState<DataRow["userData"]>({
+    memberName: "",
+    studentId: "",
+    major1: "",
+    clubList: [],
+  });
+
   const [imageSrc, setImageSrc]: any = useState(null);
   // 출처: https://itprogramming119.tistory.com/entry/React-이미지-파일업로드-미리보기-구현하기 [코딩병원:티스토리]
+  const [loginHeader, setLoginHeader] = useState(false);
+
+  useEffect(() => {
+    const loginHeader = IsLogin(); // IsLogin 함수를 호출하여 로그인 상태를 확인합니다.
+    setLoginHeader(loginHeader);
+
+    // setLoginHeader 값이 false이면 index.tsx로 이동합니다.
+    if (!loginHeader) {
+      router.push("/"); // 이동할 페이지의 경로를 설정합니다.
+    }
+  }, [setLoginHeader, router]);
 
   const onSubmit = useCallback(() => {
-    console.log("이름 = ", userName);
-    console.log("학번 = ", userId);
-    console.log("전공 =", userCollege);
-    console.log("사진 = ", imageSrc);
+    console.log("Name = ", userData.memberName);
+    console.log("Student number = ", userData.studentId);
+    console.log("Major =", userData.major1);
+    console.log("Photo = ", imageSrc);
+
+    const formData = new FormData();
+    const value = [
+      {
+        studentId: userData.studentId,
+        memberName: userData.memberName,
+        major1: userData.major1,
+      },
+    ];
+    const blob = new Blob([JSON.stringify(value)], {
+      type: "application/json",
+    });
+    formData.append("data", blob); // 또는  formData.append("data", JSON.stringify(value)); // JSON 형식으로 파싱.(백엔드의 요청에 따라 전송방식이 달라진다.)
     customAxios
-      .put(`/member/`, {
-        memberName: userName,
-        studentId: userId,
-        major1: userCollege,
-        profileImage: imageSrc,
-      })
+
+      .put(`/member`, formData, {})
+
+
       .then(() => {
         console.log("put success");
         router.reload();
       })
-      .catch((error) => console.error("에러 발생 이유: ", error.response));
-  }, [userName, userId, userCollege, imageSrc]);
+      .catch((error) => console.error("Reason for error: ", error.response));
+  }, [userData, imageSrc]);
 
   useEffect(() => {
-    console.log("이름 = ", userName);
-    console.log("학번 = ", userId);
-    console.log("전공 =", userCollege);
+    console.log("이름 = ", userData.memberName);
+    console.log("학번 = ", userData.studentId);
+    console.log("전공 =", userData.major1);
     console.log("사진 = ", imageSrc);
   }),
-    [userName, userId, userCollege, imageSrc];
+    [userData];
 
   useEffect(() => {
     customAxios
-      .get(`http://13.125.162.181:8084/member`)
+      .get(`/member`)
       .then((res) => {
         setUserData(res.data.data);
-        setUserName(res.data.data.memberName);
-        setUserId(res.data.data.studentId);
-        setUserCollege(res.data.data.major1);
         setImageSrc(res.data.data.profileImage);
 
         console.log(res.data.data);
-        console.log(userData);
         console.log("불러오기 성공");
       })
       .catch((error) => console.error("에러:에러!!!!!!!!!!!!!!", error));
@@ -97,29 +129,13 @@ export function MainInfo() {
       <TextNImageContainer>
         <OtherInfoTextContainer>
           <OtherInfoText>이름</OtherInfoText>
-          <TextSelectBox
-            id="name"
-            placeholder={userData.memberName}
-            onChange={(event) => setUserName(event.target.value)}
-            value={userName}
-          ></TextSelectBox>
+          <TextSelectBox>{userData.memberName}</TextSelectBox>
 
           <OtherInfoText>학번</OtherInfoText>
-          <TextSelectBox
-            id="id"
-            placeholder={userData.studentId}
-            onChange={(event) => setUserId(event.target.value)}
-            value={userId}
-          ></TextSelectBox>
+          <TextSelectBox>{userData.studentId}</TextSelectBox>
 
           <OtherInfoText>소속</OtherInfoText>
-          <TextSelectBox
-            id="college"
-            placeholder={userData.major1}
-            onChange={(event) => setUserCollege(event.target.value)}
-            value={userCollege}
-          ></TextSelectBox>
-          <OtherInfoText>내 동아리</OtherInfoText>
+          <TextSelectBox>{userData.major1}</TextSelectBox>
         </OtherInfoTextContainer>
 
         {imageSrc ? (
@@ -135,9 +151,11 @@ export function MainInfo() {
           type="file"
           onChange={(e) => onUpload(e)}
         />
-        <DeleteButton onClick={resetImageSrc}>삭제</DeleteButton>
       </ImageUpLoad>
-
+      <ImageDelete>
+        <DeleteButton onClick={resetImageSrc}>삭제</DeleteButton>
+      </ImageDelete>
+      <OtherInfoText>내 동아리</OtherInfoText>
       <ClubTable clubList={userData.clubList} />
 
       <BottomBorder />
