@@ -4,7 +4,6 @@ import Image from "next/image";
 export const UserImage = styled.img`
   width: 19.6rem;
   height: 22.2rem;
-  border: 2px solid #c1c7cd;
 `;
 export const Placeholder = styled(Image)`
   width: 19.6rem;

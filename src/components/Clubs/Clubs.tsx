@@ -2,13 +2,20 @@
 import { customAxios } from "@/Utils/customAxios";
 import { Club } from "../Club/Club";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import crying from "@public/crying.svg";
 import {
   DisabledShiftButton,
   ShiftButton,
   ActiveNumberButton,
   NumberButton,
 } from "@components/UserManageTable/UserManageTable.styled";
-import { ClubTable, PageTab } from "./Clubs.styled";
+import {
+  ClubTable,
+  NoData,
+  NoDataBox,
+  NoDataText,
+  PageTab,
+} from "./Clubs.styled";
 
 interface ParentProps {
   ids: number[];
@@ -167,25 +174,34 @@ export const Clubs = ({
   }, [clubData, recruit]);
 
   const printClub = useCallback(() => {
-    return currentData.map((club, i) => {
-      let recruit = "";
-      if (club.recruitment === true) {
-        recruit = "모집 중";
-      } else {
-        recruit = "모집 X";
-      }
-      let department = club.division.replace("분과", "");
+    if (currentData.length > 0) {
+      return currentData.map((club, i) => {
+        let recruit = "";
+        if (club.recruitment === true) {
+          recruit = "모집 중";
+        } else {
+          recruit = "모집 X";
+        }
+        let department = club.division.replace("분과", "");
+        return (
+          <Club
+            recruit={recruit}
+            college={club.college}
+            department={department}
+            name={club.clubName}
+            id={club.clubId.toString()}
+            key={i}
+          />
+        );
+      });
+    } else {
       return (
-        <Club
-          recruit={recruit}
-          college={club.college}
-          department={department}
-          name={club.clubName}
-          id={club.clubId.toString()}
-          key={i}
-        />
+        <NoDataBox>
+          <NoData src={crying} alt="Have No Data" />
+          <NoDataText>조건을 만족하는 동아리가 존재하지 않습니다.</NoDataText>
+        </NoDataBox>
       );
-    });
+    }
   }, [currentData]);
   return (
     <>

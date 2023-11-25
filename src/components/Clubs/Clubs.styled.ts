@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styled from "styled-components";
 
 export const PageTab = styled.div`
@@ -17,4 +18,20 @@ export const ClubTable = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 95rem;
+`;
+
+export const NoDataBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const NoData = styled(Image)`
+  width: 30rem;
+  height: 30rem;
+`;
+
+export const NoDataText = styled.span`
+  font-size: 2rem;
+  font-weight: 800;
+  color: grey;
 `;

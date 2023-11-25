@@ -35,9 +35,7 @@ function Categories({
         setCategories(data);
         setAll(extractIds(data, fieldName));
       })
-      .catch((error) => {
-        console.error("에러 발생:", error);
-      });
+      .catch((error) => {});
   }, [filePath, setAll, fieldName]);
 
   function extractIds(data: any, type: string) {
