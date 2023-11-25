@@ -3,6 +3,7 @@ import left from "@public/left_fill.svg";
 import disabled_left from "@public/left.svg";
 import right from "@public/right_fill.svg";
 import disabled_right from "@public/right.svg";
+import crying from "@public/crying.svg";
 import {
   PageContainer,
   RecruitClubText,
@@ -10,6 +11,9 @@ import {
   Table,
   Button,
   Clubs,
+  NoData,
+  NoDataBox,
+  NoDataText,
 } from "./RecruitClub.styled";
 import { useCallback, useEffect, useState } from "react";
 import { customAxios } from "@/Utils/customAxios";
@@ -69,19 +73,28 @@ export function RecruitClub({ displayNum }: ParentProps) {
     if (page < lastPage) setPage(page + 1);
   }, [lastPage, page]);
   const printClubs = useCallback(() => {
-    return filteredData.map((data, idx) => {
+    if (filteredData.length > 0) {
+      return filteredData.map((data, idx) => {
+        return (
+          <ClubContainer key={idx}>
+            <Club
+              recruit="모집 중"
+              college={data.college}
+              department={data.division.replace("분과", "")}
+              name={data.clubName}
+              id={data.clubId}
+            />
+          </ClubContainer>
+        );
+      });
+    } else {
       return (
-        <ClubContainer key={idx}>
-          <Club
-            recruit="모집 중"
-            college={data.college}
-            department={data.division.replace("분과", "")}
-            name={data.clubName}
-            id={data.clubId}
-          />
-        </ClubContainer>
+        <NoDataBox>
+          <NoData src={crying} alt="Have No Data" />
+          <NoDataText>현재 모집 중인 동아리가 없습니다.</NoDataText>
+        </NoDataBox>
       );
-    });
+    }
   }, [filteredData]);
   return lastPage <= 0 ? (
     <PageContainer>

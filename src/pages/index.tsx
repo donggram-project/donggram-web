@@ -28,16 +28,27 @@ export default function Home() {
       setSearch(true);
     });
   }, [searchValue]);
-  //<Header onSearchChange={onSearchChange} onSearchClick={onSearchClick} />
+  const falseSearch = () => {
+    setSearch(false);
+  };
+  //<Header onSearchChange={onSearchChange} onSearchClick={onSearchClick} falseSearch={falseSearch}/>
   //<SearchResult displayNum={8} ResultClubs={searchResult} />
   return search ? (
     <PageConatiner>
-      <Header onSearchChange={onSearchChange} onSearchClick={onSearchClick} />
+      <Header
+        onSearchChange={onSearchChange}
+        onSearchClick={onSearchClick}
+        falseSearch={falseSearch}
+      />
       <SearchResult displayNum={8} ResultClubs={searchResult} />
     </PageConatiner>
   ) : (
     <PageConatiner>
-      <Header onSearchChange={onSearchChange} onSearchClick={onSearchClick} />
+      <Header
+        onSearchChange={onSearchChange}
+        onSearchClick={onSearchClick}
+        falseSearch={falseSearch}
+      />
       <Banner />
       <RecruitClub displayNum={8} />
     </PageConatiner>

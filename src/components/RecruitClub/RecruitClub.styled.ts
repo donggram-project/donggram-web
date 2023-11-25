@@ -1,6 +1,22 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
 
+export const NoDataBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const NoData = styled(Image)`
+  width: 30rem;
+  height: 30rem;
+`;
+
+export const NoDataText = styled.span`
+  font-size: 2rem;
+  font-weight: 800;
+  color: grey;
+`;
+
 export const PageContainer = styled.div`
   display: flex;
   flex-direction: column;

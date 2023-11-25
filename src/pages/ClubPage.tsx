@@ -52,16 +52,27 @@ export default function ClubPage() {
       setSearch(true);
     });
   }, [searchValue]);
-  //<Header onSearchChange={onSearchChange} onSearchClick={onSearchClick} />
+  const falseSearch = () => {
+    setSearch(false);
+  };
+  //<Header onSearchChange={onSearchChange} onSearchClick={onSearchClick} falseSearch={falseSearch}/>
   //<SearchResult displayNum={8} ResultClubs={searchResult} />
   return search ? (
     <PageContainer>
-      <Header onSearchChange={onSearchChange} onSearchClick={onSearchClick} />
+      <Header
+        onSearchChange={onSearchChange}
+        onSearchClick={onSearchClick}
+        falseSearch={falseSearch}
+      />
       <SearchResult displayNum={8} ResultClubs={searchResult} />
     </PageContainer>
   ) : (
     <PageContainer>
-      <Header onSearchChange={onSearchChange} onSearchClick={onSearchClick} />
+      <Header
+        onSearchChange={onSearchChange}
+        onSearchClick={onSearchClick}
+        falseSearch={falseSearch}
+      />
       <div>
         <College>
           <Categories

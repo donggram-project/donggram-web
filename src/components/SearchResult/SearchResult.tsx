@@ -10,16 +10,19 @@ import {
   Table,
   Button,
   Clubs,
+  NoDataText,
+  NoData,
+  NoDataBox,
 } from "./SearchResult.styled";
 import { useCallback, useEffect, useState } from "react";
-import { customAxios } from "@/Utils/customAxios";
-import { RecruitClub } from "../RecruitClub/RecruitClub";
+import crying from "@public/crying.svg";
 
 interface ClubData {
   clubId: string;
   college: string;
   division: string;
   clubName: string;
+  clubImage: string;
   recruitment: boolean;
 }
 
@@ -76,14 +79,14 @@ export function SearchResult({ displayNum, ResultClubs }: ParentProps) {
       );
     });
   }, [filteredData]);
-  return lastPage <= 0 ? (
-    <PageContainer>
-      <RecruitClubText>검색 결과가 존재하지 않습니다.</RecruitClubText>
-      <RecruitClub displayNum={4} />
-    </PageContainer>
+  return lastPage < 0 ? (
+    <NoDataBox>
+      <NoData src={crying} alt="Have No Data" />
+      <NoDataText>검색 결과가 존재하지 않습니다.</NoDataText>
+    </NoDataBox>
   ) : (
     <PageContainer>
-      <RecruitClubText>검색 결과</RecruitClubText>
+      <RecruitClubText>검색된 동아리 목록</RecruitClubText>
       <Table>
         <Button
           src={page === 0 ? disabled_left : left}
