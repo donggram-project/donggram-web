@@ -44,7 +44,7 @@ export function SignUp({ signUpModal, toggleSignUp, toggleSignIn }: Modal) {
       major2: major2,
     };
 
-    axios //api post 예시
+    customAxios //api post 예시
       .post("/join", formData)
       .then((res) => {
         toggleSignUp();
