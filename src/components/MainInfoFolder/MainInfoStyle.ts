@@ -79,18 +79,34 @@ export const ButtonText = styled.div`
 
 //
 
-export const TextSelectBox = styled.input`
+export const TextSelectBox = styled.div`
   width: 46rem;
   height: 3.2rem;
   flex-shrink: 0;
   border-radius: 0.5rem;
   border: 0.1rem solid #c1c7cd;
   background: #fff;
+  padding: 2px 4px 2px 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 4px 2px 10px;
+  font-family: Roboto;
+  font-size: 1.7rem;
+  font-style: normal;
+  font-weight: 500;
 `;
 export const ImageUpLoad = styled.div`
   justify-content: center;
   display: flex;
-  margin-left: 62rem;
+  margin-left: 64rem;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+`;
+export const ImageDelete = styled.div`
+  justify-content: center;
+  display: flex;
+  margin-left: 51rem;
+  margin-top: 1rem;
 `;
 export const PlaceholderImage = styled(Image)`
   margin-left: 28rem;
@@ -104,8 +120,8 @@ export const PlaceholderImage = styled(Image)`
   // Add any additional styles for the placeholder image here
 `;
 export const DeleteButton = styled.label`
-  margin-left: 1rem;
-  width: 5rem;
+  margin-left: -3.5rem;
+  width: 6rem;
   height: 2rem;
   padding-left: 1.1rem;
   flex-shrink: 0;
@@ -120,6 +136,7 @@ export const DeleteButton = styled.label`
   border: 1px solid #000; /* Add a 1px solid black border */
   border-radius: 2px;
   background-color: #ececec;
+  font-size: 1.4rem;
   /* 
   cursor: pointer; */
   &:hover {

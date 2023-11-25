@@ -27,9 +27,11 @@ const ClubData = ({ clubData }: any) => {
 
       .then((res) => {
         console.log("신청 완료");
+        alert("신청완료");
       })
       .catch((error) => {
         console.log("신청 실패");
+        alert("신청실패");
         console.log(error);
       });
   }, [clubData]);

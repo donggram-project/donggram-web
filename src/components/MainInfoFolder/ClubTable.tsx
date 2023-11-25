@@ -36,6 +36,7 @@ const HeaderText = styled.div`
   font-weight: 500;
   line-height: 110%;
   width: 20rem;
+  margin-left: -2rem;
 `;
 const BodyText = styled.div`
   color: var(--cool-gray-100, #121619);
