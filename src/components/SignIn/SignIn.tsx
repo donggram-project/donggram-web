@@ -38,8 +38,8 @@ export function SignIn({
       studentId: id,
       password: pw,
     };
-    axios //api post 예시
-      .post("http://13.125.162.181:8084/login", formData)
+    customAxios
+      .post("/login", formData)
       .then((res) => {
         const Token = res.data.data;
         axios.defaults.headers.common["Access_Token"] = `${Token.accessToken}`;
@@ -48,7 +48,7 @@ export function SignIn({
         toggleSignIn();
         LoginControl(true);
       })
-      .catch((error) => {
+      .catch(() => {
         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
       });
   }, [id, pw, toggleSignIn, LoginControl]);
@@ -57,6 +57,10 @@ export function SignIn({
     if (e.key === "Enter") {
       onSubmit();
     }
+  };
+
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPw(e.target.value);
   };
 
   return signInModal ? (
@@ -79,9 +83,7 @@ export function SignIn({
             <Password
               text="비밀번호"
               placeholder="비밀번호"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setPw(e.target.value);
-              }}
+              onChange={handlePassword}
               onKeyDown={handleKeyDown}
             />
           </form>

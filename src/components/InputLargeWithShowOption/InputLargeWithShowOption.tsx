@@ -16,7 +16,7 @@ interface Input {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export function Password({ text, placeholder, onKeyDown }: Input) {
+export function Password({ text, placeholder, onKeyDown, onChange }: Input) {
   const [inputType, setInputType] = useState("password");
 
   const handleImageClick = () => {
@@ -32,6 +32,7 @@ export function Password({ text, placeholder, onKeyDown }: Input) {
           placeholder={placeholder}
           autoComplete="off"
           onKeyDown={onKeyDown}
+          onChange={onChange}
         />
         <PasswordEyeImage
           src={inputType === "password" ? showEye2 : showEye}
