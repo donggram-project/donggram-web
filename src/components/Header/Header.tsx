@@ -22,10 +22,16 @@ import { useCallback, useEffect, useState } from "react";
 interface ParentProps {
   onSearchClick: () => void;
   onSearchChange: (value: string) => void;
+  falseSearch: () => void;
 }
 
-export const Header = ({ onSearchClick, onSearchChange }: ParentProps) => {
+export const Header = ({
+  onSearchClick,
+  onSearchChange,
+  falseSearch,
+}: ParentProps) => {
   const [LoginHeader, setLoginHeader] = useState(false);
+  const [search, setSearch] = useState(false);
   useEffect(() => {
     setLoginHeader(IsLogin());
   }, []);
@@ -55,14 +61,22 @@ export const Header = ({ onSearchClick, onSearchChange }: ParentProps) => {
   );
   const handleLoginMenu = useCallback(() => {
     if (LoginHeader) {
-      return <Link href="../MyClubPage">내 동아리</Link>;
+      return (
+        <Link href="../MyClubPage" onClick={falseSearch}>
+          내 동아리
+        </Link>
+      );
     }
-    return <Link href="../MyClubPage">모집 동아리</Link>;
-  }, [LoginHeader]);
+    return (
+      <Link href="../MyClubPage" onClick={falseSearch}>
+        모집 동아리
+      </Link>
+    );
+  }, [LoginHeader, falseSearch]);
   return (
     <header>
       <HeaderContainer>
-        <Link href="../">
+        <Link href="../" onClick={falseSearch}>
           <LogoContainer>
             <LogoImage src={logo} alt="logo" />
             <LogoText>DONGRAM</LogoText>
@@ -70,7 +84,9 @@ export const Header = ({ onSearchClick, onSearchChange }: ParentProps) => {
         </Link>
         <BoardContainer>
           <ClubText>
-            <Link href="../ClubPage">동아리정보</Link>
+            <Link href="../ClubPage" onClick={falseSearch}>
+              동아리정보
+            </Link>
           </ClubText>
           <ClubText>{handleLoginMenu()}</ClubText>
         </BoardContainer>
