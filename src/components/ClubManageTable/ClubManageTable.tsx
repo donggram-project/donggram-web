@@ -194,7 +194,9 @@ export const ClubManageTable = ({
   useEffect(() => {
     customAxios
       .get("admin/clubs/all")
-      .then((response) => setOriginData(response.data.data))
+      .then((response) => {
+        setOriginData(response.data.data);
+      })
       .catch((error) => console.error("에러:", error));
   }, [handleClicked, ClickedStatus]);
 
@@ -266,7 +268,7 @@ export const ClubManageTable = ({
               clicked={item.id === clickedId}
             >
               {Object.values(item).map((value, colIndex) => {
-                if (colIndex != 2) {
+                if (colIndex != 2 && colIndex != 6) {
                   return (
                     <TableText key={colIndex} isId={colIndex === 0}>
                       {value}

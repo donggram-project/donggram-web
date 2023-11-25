@@ -191,7 +191,6 @@ export const ClubInfo = ({
     customAxios
       .get(`admin/clubs/${ClickedId}`)
       .then((response) => {
-        console.log(response.data.data);
         if (response.data.data.clubCreated == null) {
           response.data.data.clubCreated = "-";
         }
@@ -206,7 +205,8 @@ export const ClubInfo = ({
         setRecruitDates(dates);
       })
       .catch((error) => {
-        console.error("에러 발생:", error);
+        setClub(undefined);
+        setChangedClub(undefined);
       });
   }, [ClickedId, club?.recruitmentPeriod, ClickedStatus]);
 
@@ -419,7 +419,10 @@ export const ClubInfo = ({
           isClubInfo={isClubInfo}
           setIsClubInfo={setIsClubInfo}
         />
-        <AdminClubMemberManageTable ParentClickedId={ClickedId} />
+        <AdminClubMemberManageTable
+          ParentClickedId={ClickedId}
+          Club={club ? club.clubName : "동아리명"}
+        />
       </ClubTab>
     )
   ) : isClubInfo ? (
@@ -431,41 +434,25 @@ export const ClubInfo = ({
           <ClubCol>
             <ClubRow>
               <Text>고유ID</Text>
-              <Admin
-                value={"로딩 중..."}
-                type="text"
-                onChange={handleAdminChange}
-              />
+              <Admin value={""} type="text" onChange={handleAdminChange} />
             </ClubRow>
             <ClubRow>
               <Text>신청일</Text>
-              <Date value={"로딩 중..."} type="text" readOnly />
+              <Date value={""} type="text" readOnly />
             </ClubRow>
           </ClubCol>
           <ClubRow2>
             <Text2>동아리명</Text2>
-            <ClubName
-              value={"로딩 중..."}
-              type="text"
-              onChange={handleNameChange}
-            />
+            <ClubName value={""} type="text" onChange={handleNameChange} />
           </ClubRow2>
           <ClubCol>
             <ClubRow2>
               <Text2>소속</Text2>
-              <Value
-                value={"로딩 중..."}
-                type="text"
-                onChange={handleCollegeChange}
-              />
+              <Value value={""} type="text" onChange={handleCollegeChange} />
             </ClubRow2>
             <ClubRow2>
               <Text2>분과</Text2>
-              <Value
-                value={"로딩 중..."}
-                type="text"
-                onChange={handleDepartChange}
-              />
+              <Value value={""} type="text" onChange={handleDepartChange} />
             </ClubRow2>
           </ClubCol>
 
@@ -482,19 +469,19 @@ export const ClubInfo = ({
             <Text>모집기간</Text>
             <RecruitDate
               disabled={true}
-              value={"로딩 중..."}
+              value={""}
               onChange={handleRecruitStartChange}
             />
             <Text>~</Text>
             <RecruitDate
               disabled={true}
-              value={"로딩 중..."}
+              value={""}
               onChange={handleRecruitEndChange}
             />
           </ClubRow>
           <ClubRow2>
             <Text2>본문</Text2>
-            <Introduction value={"로딩 중..."} onChange={handleIntroChange} />
+            <Introduction value={""} onChange={handleIntroChange} />
           </ClubRow2>
           <Buttons>
             <Delete>삭제</Delete>
@@ -509,7 +496,10 @@ export const ClubInfo = ({
   ) : (
     <ClubTab>
       <AdminClubHeader isClubInfo={isClubInfo} setIsClubInfo={setIsClubInfo} />
-      <AdminClubMemberManageTable ParentClickedId={ClickedId} />
+      <AdminClubMemberManageTable
+        ParentClickedId={ClickedId}
+        Club={club ? club.clubName : "동아리명"}
+      />
     </ClubTab>
   );
 };

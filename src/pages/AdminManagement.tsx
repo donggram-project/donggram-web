@@ -12,8 +12,9 @@ import { useRouter } from "next/router";
 const Tab = styled.div`
   margin-top: 3rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: start;
+  gap: 10rem;
 `;
 const Admin = styled.div`
   margin-bottom: 8rem;

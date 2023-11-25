@@ -38,7 +38,6 @@ export function SearchResult({ displayNum, ResultClubs }: ParentProps) {
   const [lastPage, setLastPage] = useState(0);
   useEffect(() => {
     const filteredData = ResultClubs;
-    console.log(ResultClubs);
     setData(filteredData);
     setLastPage(Math.ceil(filteredData.length / displayNum) - 1);
   }, [displayNum, ResultClubs]);
