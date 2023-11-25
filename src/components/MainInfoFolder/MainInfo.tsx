@@ -74,7 +74,9 @@ export function MainInfo() {
     });
     formData.append("data", blob); // 또는  formData.append("data", JSON.stringify(value)); // JSON 형식으로 파싱.(백엔드의 요청에 따라 전송방식이 달라진다.)
     customAxios
+
       .put(`/member`, formData, {})
+
 
       .then(() => {
         console.log("put success");
