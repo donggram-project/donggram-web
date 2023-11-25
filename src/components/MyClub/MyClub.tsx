@@ -24,6 +24,7 @@ interface ClubData {
   division: string;
   clubName: string;
   recruitment: boolean;
+  clubImage: string;
 }
 
 interface ParentProps {
@@ -37,13 +38,11 @@ export function MyClub({ displayNum }: ParentProps) {
   const [lastPage, setLastPage] = useState(0);
   useEffect(() => {
     customAxios
-      .get("/clubs/all")
+      .get("/member/clubs")
       .then((res) => {
-        const filteredData = res.data.data.filter((orgData: ClubData) => {
-          return orgData.recruitment === true; // return을 추가
-        });
-        setData(filteredData);
-        setLastPage(Math.ceil(filteredData.length / displayNum) - 1);
+        const data = res.data.data;
+        setData(data);
+        setLastPage(Math.ceil(data.length / displayNum) - 1);
       })
       .catch((error) => {
         console.error("에러: ", error);
@@ -83,6 +82,7 @@ export function MyClub({ displayNum }: ParentProps) {
               department={data.division.replace("분과", "")}
               name={data.clubName}
               id={data.clubId}
+              image={data.clubImage}
             />
           </ClubContainer>
         );

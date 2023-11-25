@@ -1,5 +1,5 @@
 //관리자 페이지 동아리 탭의 회원 관리 테이블
-import { useCallback, useEffect, useState, useMemo } from "react";
+import { useCallback, useEffect, useState, useMemo, use } from "react";
 import {
   PageTab,
   DisabledShiftButton,
@@ -39,6 +39,7 @@ export const AdminClubMemberManageTable = ({
   Club,
 }: ParentProps) => {
   const [data, setData] = useState<DataRow[]>([]);
+  const [click, setClick] = useState(true);
 
   //table 페이지
   const [currentPage, setCurrentPage] = useState(1);
@@ -140,10 +141,17 @@ export const AdminClubMemberManageTable = ({
     customAxios
       .get(`admin/clubs/${ParentClickedId}/members`)
       .then((response) => {
-        setData(response.data.data);
+        const filteredData = response.data.data.filter(
+          (item: any) => item.status !== "rejected"
+        );
+        setData(filteredData);
       })
       .catch((error) => {});
-  }, [ParentClickedId]);
+  }, [ParentClickedId, click]);
+
+  useEffect(() => {
+    setClick(true);
+  }, [click]);
 
   const handleReject = useCallback(
     (userId: string) => () => {
@@ -151,7 +159,9 @@ export const AdminClubMemberManageTable = ({
         .put(
           `/admin/clubs/members/reject?memberId=${userId}&clubId=${ParentClickedId}`
         )
-        .then((res) => {})
+        .then((res) => {
+          setClick(false);
+        })
         .catch(() => alert("거절에 실패하였습니다."));
     },
     [ParentClickedId]
@@ -162,7 +172,9 @@ export const AdminClubMemberManageTable = ({
         .put(
           `/admin/clubs/members/approve?memberId=${userId}&clubId=${ParentClickedId}`
         )
-        .then((res) => {})
+        .then((res) => {
+          setClick(false);
+        })
         .catch(() => alert("승인에 실패하였습니다."));
     },
     [ParentClickedId]

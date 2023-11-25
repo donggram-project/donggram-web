@@ -35,6 +35,9 @@ import {
 import { customAxios } from "@/Utils/customAxios";
 import { AdminClubHeader } from "../AdminClubHeader/AdminClubHeader";
 import { AdminClubMemberManageTable } from "../AdminClubMemberManageTable/AdminClubMemberManageTable";
+import { headers } from "next/dist/client/components/headers";
+import { Router } from "react-router";
+import { useRouter } from "next/router";
 
 interface DataRow {
   clubId: string;
@@ -159,18 +162,18 @@ export const ClubInfo = ({
   }, [changedClub]);
   const handelCancleClick = useCallback(() => {
     setChangedClub(club);
-    const dates = club?.recruitmentPeriod.split("~") || [];
-    if (dates.length === 1 && dates[0] === "") {
-      dates.push("");
+    if (club?.recruitmentPeriod) {
+      const dates = club?.recruitmentPeriod.split("~") || [];
+      if (dates.length === 1 && dates[0] === "") {
+        dates.push("");
+      }
+      setRecruitDates(dates);
     }
-    setRecruitDates(dates);
   }, [club]);
-  const handleSaveClick = useCallback(() => {
-    setClub(changedClub);
-  }, [changedClub]);
   const handleClubApprove = useCallback(() => {
     customAxios
       .put(`/admin/clubs/${ClickedId}/approve`)
+
       .then((res) => {
         handleStatus("approve");
         alert("동아리가 승인되었습니다.");
@@ -209,6 +212,26 @@ export const ClubInfo = ({
         setChangedClub(undefined);
       });
   }, [ClickedId, club?.recruitmentPeriod, ClickedStatus]);
+
+  const router = useRouter();
+
+  const handleSaveClick = useCallback(() => {
+    const value = {
+      clubName: changedClub?.clubName,
+      isRecruitment: changedClub?.recruitment,
+      recruitmentPeriod: changedClub?.recruitmentPeriod,
+      college: changedClub?.college,
+      division: changedClub?.division,
+      content: changedClub?.content,
+      clubCreated: changedClub?.clubCreated,
+    };
+    customAxios
+      .put(`/admin/clubs/${ClickedId}`, value)
+      .then(() => {
+        router.reload();
+      })
+      .catch(() => {});
+  }, [ClickedId, changedClub, router]);
 
   const PrintImage = useCallback(() => {
     if (changedClub) {

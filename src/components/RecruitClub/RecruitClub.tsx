@@ -24,6 +24,7 @@ interface ClubData {
   division: string;
   clubName: string;
   recruitment: boolean;
+  clubImage: string;
 }
 
 interface ParentProps {
@@ -83,6 +84,7 @@ export function RecruitClub({ displayNum }: ParentProps) {
               department={data.division.replace("분과", "")}
               name={data.clubName}
               id={data.clubId}
+              image={data.clubImage}
             />
           </ClubContainer>
         );

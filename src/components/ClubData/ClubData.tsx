@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 
 import { customAxios } from "@/Utils/customAxios";
-import clubimage from "@/../public/placeholder.png";
 import {
   DetailExplainText,
   HeadBorder,
@@ -24,13 +23,10 @@ const ClubData = ({ clubData }: any) => {
     console.log(clubData.clubId);
     customAxios
       .post(`/clubs/${clubData.clubId}/join`)
-
       .then((res) => {
-        console.log("신청 완료");
         alert("신청완료");
       })
       .catch((error) => {
-        console.log("신청 실패");
         alert("신청실패");
         console.log(error);
       });
@@ -41,7 +37,7 @@ const ClubData = ({ clubData }: any) => {
       <HeadBorder></HeadBorder>
 
       <ExplainContainer>
-        <ClubImage src={clubimage} alt="club main image" />
+        <ClubImage src={clubData.clubImage} alt="club main image" />
         <div>
           <ClubName>{clubData.clubName}</ClubName>
           <ClubExplainContainer>

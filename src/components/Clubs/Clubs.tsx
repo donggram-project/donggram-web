@@ -30,6 +30,7 @@ interface clubinfo {
   college: string;
   division: string;
   recruitment: boolean;
+  clubImage: string;
 }
 
 export const Clubs = ({
@@ -156,6 +157,7 @@ export const Clubs = ({
       .get(`clubs?collegeIds=${collegeIds}&divisionIds=${divisionIds}`)
       .then((response) => {
         setClubData(response.data.data);
+        console.log(response.data.data);
       })
       .catch((error) => {
         console.error("에러: ", error);
@@ -190,6 +192,7 @@ export const Clubs = ({
             department={department}
             name={club.clubName}
             id={club.clubId.toString()}
+            image={club.clubImage}
             key={i}
           />
         );

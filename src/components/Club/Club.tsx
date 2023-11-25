@@ -16,13 +16,21 @@ interface ClubProps {
   department: string;
   name: string;
   id: string;
+  image: string;
 }
 
-export function Club({ recruit, college, department, name, id }: ClubProps) {
+export function Club({
+  recruit,
+  college,
+  department,
+  name,
+  id,
+  image,
+}: ClubProps) {
   return (
     <ClubIndexContainer>
       <Link href={`/ClubExplain?clubId=${id}`}>
-        <ClubImage src={clubimage} alt="club main image" />
+        <ClubImage src={image} alt="club main image" />
         <ClubIndexExplain>
           <Category props={recruit} />
           <Category props={college} />

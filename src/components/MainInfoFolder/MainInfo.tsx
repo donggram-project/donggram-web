@@ -77,13 +77,12 @@ export function MainInfo() {
 
       .put(`/member`, formData, {})
 
-
       .then(() => {
         console.log("put success");
         router.reload();
       })
       .catch((error) => console.error("Reason for error: ", error.response));
-  }, [userData, imageSrc]);
+  }, [userData, imageSrc, router]);
 
   useEffect(() => {
     console.log("이름 = ", userData.memberName);

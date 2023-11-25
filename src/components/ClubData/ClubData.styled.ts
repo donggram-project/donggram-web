@@ -26,7 +26,7 @@ export const ExplainContainer = styled.div`
   justify-content: space-around;
   margin-top: 4rem;
 `;
-export const ClubImage = styled(Image)`
+export const ClubImage = styled.img`
   width: 40.3rem;
   height: 44.1rem;
   margin-right: 3rem;

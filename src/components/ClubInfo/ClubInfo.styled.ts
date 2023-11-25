@@ -1,6 +1,17 @@
 import Image from "next/image";
 import styled from "@emotion/styled";
 
+export const ImageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+export const Input = styled.input`
+  font-size: 1.2rem;
+  color: grey;
+`;
+
 export const ClubTab = styled.div`
   display: flex;
   flex-direction: column;

@@ -74,6 +74,7 @@ export function SearchResult({ displayNum, ResultClubs }: ParentProps) {
             department={data.division.replace("분과", "")}
             name={data.clubName}
             id={data.clubId}
+            image={data.clubImage}
           />
         </ClubContainer>
       );
