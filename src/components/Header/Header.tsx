@@ -68,30 +68,13 @@ export const Header = ({
             <LogoText>DONGRAM</LogoText>
           </LogoContainer>
         </Link>
-      );
-    }
-    return (
-      <Link href="../MyClubPage" onClick={falseSearch}>
-        모집 동아리
-      </Link>
-    );
-  }, [LoginHeader, falseSearch]);
-  return (
-    <header>
-      <HeaderContainer>
-        <Link href="../" onClick={falseSearch}>
-          <LogoContainer>
-            <LogoImage src={logo} alt="logo" />
-            <LogoText>DONGRAM</LogoText>
-          </LogoContainer>
-        </Link>
         <BoardContainer>
           <ClubText>
-            <Link href="../ClubPage" onClick={falseSearch}>
-              동아리정보
-            </Link>
+            <Link href="../ClubPage">동아리정보</Link>
           </ClubText>
-          <ClubText>{handleLoginMenu()}</ClubText>
+          <ClubText>
+            <Link href="../MyClubPage">내 동아리</Link>
+          </ClubText>
         </BoardContainer>
         <SearchContainer>
           <SearchImage
@@ -109,7 +92,42 @@ export const Header = ({
         </SearchContainer>
         {LoginButtonControl()}
       </HeaderContainer>
-      <GreyBorder />
+      <GreyBorder></GreyBorder>
+    </header>
+  ) : (
+    <header>
+      <HeaderContainer>
+        <Link href="../">
+          <LogoContainer>
+            <LogoImage src={logo} alt="logo" />
+            <LogoText>DONGRAM</LogoText>
+          </LogoContainer>
+        </Link>
+        <BoardContainer>
+          <ClubText>
+            <Link href="../ClubPage">동아리정보</Link>
+          </ClubText>
+          <ClubText>
+            <Link href="../MyClubPage">모집 동아리</Link>
+          </ClubText>
+        </BoardContainer>
+        <SearchContainer>
+          <SearchImage
+            src={search_icon}
+            alt="search-icon"
+            onClick={onSearchClick}
+          />
+          <SearchInput
+            type="text"
+            placeholder="Search for..."
+            value={inputValue}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+          />
+        </SearchContainer>
+        {LoginButtonControl()}
+      </HeaderContainer>
+      <GreyBorder></GreyBorder>
     </header>
   );
 };
