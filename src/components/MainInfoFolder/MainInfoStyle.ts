@@ -33,7 +33,7 @@ export const TextNImageContainer = styled.div`
   display: flex;
 `;
 
-export const ClubImageCss = styled(Image)`
+export const ClubImageCss = styled.img`
   margin-left: 28rem;
   width: 20rem;
   height: 23rem;
@@ -79,7 +79,7 @@ export const ButtonText = styled.div`
 
 //
 
-export const TextSelectBox = styled.div`
+export const TextSelectBox = styled.input`
   width: 46rem;
   height: 3.2rem;
   flex-shrink: 0;
@@ -87,33 +87,44 @@ export const TextSelectBox = styled.div`
   border: 0.1rem solid #c1c7cd;
   background: #fff;
 `;
-export const TextNImageBox = styled.div`
-  border-radius: 5px;
-  background: #c1c7cd;
+export const ImageUpLoad = styled.div`
+  justify-content: center;
   display: flex;
+  margin-left: 62rem;
+`;
+export const PlaceholderImage = styled(Image)`
+  margin-left: 28rem;
   width: 20rem;
-  padding: 2px 4px 2px 10px;
+  height: 23rem;
   justify-content: center;
   align-items: center;
-  gap: 2px;
-  margin-top: 0.3rem;
-`;
-
-export const CloseXimage = styled.img`
-  width: 1.6rem;
-  height: 1.6rem;
+  gap: 1rem;
   flex-shrink: 0;
+  margin-top: 5rem;
+  // Add any additional styles for the placeholder image here
 `;
-export const Texting = styled.div`
-  color: var(--cool-gray-90, #21272a);
+export const DeleteButton = styled.label`
+  margin-left: 1rem;
+  width: 5rem;
+  height: 2rem;
+  padding-left: 1.1rem;
+  flex-shrink: 0;
+  color: #000;
+  text-align: center;
   font-family: Roboto;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 140%; /* 19.6px */
-  font-family: Roboto;
-  &#NoneBox {
-    margin-top: 0.4rem;
-    margin-left: 0.5rem;
+  line-height: 140%; /* 23.8px */
+  text-align: left;
+  border: 1px solid #000; /* Add a 1px solid black border */
+  border-radius: 2px;
+  background-color: #ececec;
+  /* 
+  cursor: pointer; */
+  &:hover {
+    background-color: #d9d9d9; /* 회색 배경색으로 변경 */
+    cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+    border-radius: 2px; /* 모서리를 10px만큼 둥글게 처리 */
   }
 `;

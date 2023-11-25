@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useCallback } from "react";
+
+import { customAxios } from "@/Utils/customAxios";
 import clubimage from "@/../public/placeholder.png";
 import {
   DetailExplainText,
@@ -18,6 +20,19 @@ import {
 } from "./ClubData.styled";
 
 const ClubData = ({ clubData }: any) => {
+  const onSubmit = useCallback(() => {
+    console.log(clubData.clubId);
+    customAxios
+      .post(`/clubs/${clubData.clubId}/join`)
+
+      .then((res) => {
+        console.log("신청 완료");
+      })
+      .catch((error) => {
+        console.log("신청 실패");
+        console.log(error);
+      });
+  }, [clubData]);
   return (
     <>
       <DetailExplainText>상세설명</DetailExplainText>
@@ -62,7 +77,7 @@ const ClubData = ({ clubData }: any) => {
                 {clubData.recruitmentPeriod}
               </ClubExplainTextBlack>
             </ClubDetailExplain>
-            <RegisterButton>신청하기</RegisterButton>
+            <RegisterButton onClick={onSubmit}>신청하기</RegisterButton>
             {/* onClick={onSubmit} 추가하기 */}
           </ClubExplainContainer>
         </div>

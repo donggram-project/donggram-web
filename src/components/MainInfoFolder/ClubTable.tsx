@@ -47,19 +47,19 @@ const BodyText = styled.div`
   width: 15rem;
 `;
 
-const ClubTable = () => {
+const ClubTable = ({ clubList }: any) => {
   return (
     <TableContainer>
       <TableHeader>
         <HeaderText>동아리 이름</HeaderText>
-        <HeaderText>상태</HeaderText>
       </TableHeader>
-      {clubTableData.clubs.map((club, index) => (
-        <TableRow key={index}>
-          <BodyText>{club.name}</BodyText>
-          <BodyText>{club.status}</BodyText>
-        </TableRow>
-      ))}
+
+      {clubList &&
+        Object.entries(clubList).map(([clubName]) => (
+          <TableRow key={clubName}>
+            <BodyText>{clubName}</BodyText>
+          </TableRow>
+        ))}
     </TableContainer>
   );
 };
