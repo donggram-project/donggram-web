@@ -25,7 +25,6 @@ interface clubinfo {
 
 export const Clubs = ({ ids, divisions, recruit }: ParentProps) => {
   const [clubData, setClubData] = useState<clubinfo[]>([]);
-  const [division, setDivision] = useState<string[]>([]);
   const [selectedClubs, setSelectedClubs] = useState<clubinfo[]>([]);
   //페이지
   const [currentPage, setCurrentPage] = useState(1);
@@ -121,60 +120,35 @@ export const Clubs = ({ ids, divisions, recruit }: ParentProps) => {
     handlePrevClick,
   ]);
   //여기까지
+  const [collegeIds, setCollegeIds] = useState("");
+  const [divisionIds, setDivisionIds] = useState("");
+
   useEffect(() => {
     if (ids.length > 0) {
-      const collegeIds = ids.join(",");
-      customAxios
-        .get(`clubs?collegeIds=${collegeIds}`)
-        .then((response) => {
-          setClubData(response.data.data);
-        })
-        .catch((error) => {
-          console.error("에러: ", error);
-        });
+      setCollegeIds(ids.join(","));
     } else {
-      customAxios
-        .get(`clubs/all`)
-        .then((response) => {
-          setClubData(response.data.data);
-        })
-        .catch((error) => {
-          console.error("에러: ", error);
-        });
+      setCollegeIds("1,2,3,4,5,6,7,8,9");
     }
-  }, [ids]);
-  useEffect(() => {
-    let newDivision: string[] = [];
     if (divisions.length > 0) {
-      divisions.map((division) => {
-        if (division === 1) {
-          newDivision.push("공연분과");
-        } else if (division === 2) {
-          newDivision.push("무예분과");
-        } else if (division === 3) {
-          newDivision.push("봉사분과");
-        } else if (division === 4) {
-          newDivision.push("전시분과");
-        } else if (division === 5) {
-          newDivision.push("종교분과");
-        } else if (division === 6) {
-          newDivision.push("체육분과");
-        } else if (division === 7) {
-          newDivision.push("학술분과");
-        }
-      });
+      setDivisionIds(divisions.join(","));
+    } else {
+      setDivisionIds("1,2,3,4,5,6,7");
     }
-    setDivision(newDivision);
-  }, [divisions]);
+  }, [ids, divisions]);
+
+  useEffect(() => {
+    customAxios
+      .get(`clubs?collegeIds=${collegeIds}&divisionIds=${divisionIds}`)
+      .then((response) => {
+        setClubData(response.data.data);
+      })
+      .catch((error) => {
+        console.error("에러: ", error);
+      });
+  }, [collegeIds, divisionIds]);
 
   useEffect(() => {
     let filteredClubs = [...clubData];
-
-    if (division.length > 0) {
-      filteredClubs = filteredClubs.filter((club) =>
-        division.includes(club.division)
-      );
-    }
 
     if (recruit) {
       filteredClubs = filteredClubs.filter((club) => club.recruitment === true);
@@ -182,7 +156,7 @@ export const Clubs = ({ ids, divisions, recruit }: ParentProps) => {
 
     setSelectedClubs(filteredClubs);
     setCurrentPage(1);
-  }, [clubData, division, recruit]);
+  }, [clubData, recruit]);
 
   const printClub = useCallback(() => {
     return currentData.map((club, i) => {
