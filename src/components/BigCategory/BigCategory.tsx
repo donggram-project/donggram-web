@@ -5,9 +5,10 @@ import { CategoryButtonCss, CategoryButtonTextCss } from "./BigCategory.styled";
 interface CategoryProps {
   props: string;
   onCategoryClick: (id: string) => void;
+  field: string;
 }
 
-export function BigCategory({ props, onCategoryClick }: CategoryProps) {
+export function BigCategory({ props, onCategoryClick, field }: CategoryProps) {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
@@ -16,7 +17,11 @@ export function BigCategory({ props, onCategoryClick }: CategoryProps) {
   };
 
   return (
-    <CategoryButtonCss isClicked={isClicked} onClick={handleClick}>
+    <CategoryButtonCss
+      isClicked={isClicked}
+      onClick={handleClick}
+      field={field}
+    >
       <CategoryButtonTextCss>{props}</CategoryButtonTextCss>
     </CategoryButtonCss>
   );

@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 interface CategoryButtonProps {
   isClicked: boolean;
+  field: string;
 }
 
 export const CategoryButtonCss = styled.div<CategoryButtonProps>`
@@ -14,8 +15,16 @@ export const CategoryButtonCss = styled.div<CategoryButtonProps>`
   margin-left: 0.4rem;
   margin-top: 1rem;
   cursor: pointer;
-  background-color: ${(props) => (props.isClicked ? "#0090F9" : "#F2F4F8")};
+  background-color: ${(props) =>
+    props.isClicked
+      ? props.field === "division"
+        ? "#B0C4DE"
+        : "#0090F9"
+      : "#F2F4F8"};
   color: ${(props) => (props.isClicked ? "white" : "black")};
+  font-family: ${(props) =>
+    props.field === "division" ? "Arial, sans-serif" : "inherit"};
+  font-weight: ${(props) => (props.field === "division" ? "bold" : "normal")};
 `;
 
 export const CategoryButtonTextCss = styled.span`

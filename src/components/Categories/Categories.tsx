@@ -68,6 +68,7 @@ function Categories({
           onCategoryClick={() =>
             handleCategoryClick(category[fieldName + "Id"])
           }
+          field={fieldName}
         />
       ))}
     </CategoryContainer>
