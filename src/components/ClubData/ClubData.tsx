@@ -56,14 +56,6 @@ const ClubData = ({ clubData }: any) => {
             <br />
             <ClubDetailExplain>
               <li>
-                <ClubExplainTextGrey>소속 과:</ClubExplainTextGrey>
-              </li>
-              <ClubExplainTextBlack>{clubData.department}</ClubExplainTextBlack>
-              {/* 소속과 관련된 데이터를 사용하도록 변경 */}
-            </ClubDetailExplain>
-            <br />
-            <ClubDetailExplain>
-              <li>
                 <ClubExplainTextGrey>카테고리:</ClubExplainTextGrey>
               </li>
               <ClubExplainTextBlack>{clubData.division}</ClubExplainTextBlack>
