@@ -74,7 +74,7 @@ export function MainInfo() {
         router.reload();
       })
       .catch((error) => console.error("Reason for error: ", error.response));
-  }, [userData, imageSrc, router]);
+  }, [imageSrc, router]);
   // Data URI를 Blob으로 변환하는 함수
   function dataURItoBlob(dataURI: string) {
     const byteString = atob(dataURI.split(",")[1]);

@@ -100,16 +100,7 @@ export function CreateClubBottom({ imageSrc }: any) {
       .catch((error) => {
         alert("저장 실패");
       });
-  }, [
-    clubName,
-    col,
-    maj,
-    dep,
-    onRecruit,
-    recruitDate,
-    clubIntroduction,
-    imageSrc,
-  ]);
+  }, [clubName, col, dep, onRecruit, recruitDate, clubIntroduction, imageSrc]);
 
   function dataURItoBlob(dataURI: string) {
     const byteString = atob(dataURI.split(",")[1]);
