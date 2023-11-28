@@ -61,7 +61,12 @@ export function MainInfo() {
     if (imageSrc) {
       // 이미지 파일이 있는 경우에만 formData에 추가
       const imageData = dataURItoBlob(imageSrc);
-      formData.append("profileImage", imageData, "profileImage.jpg");
+      if (imageData != undefined) {
+        formData.append("profileImage", imageData, "profileImage.jpg");
+      } else {
+        const emptyBlob = new Blob();
+        formData.append("profileImage", emptyBlob, "profileImage.jpg");
+      }
     } else {
       const emptyBlob = new Blob();
       formData.append("profileImage", emptyBlob, "profileImage.jpg");
@@ -74,8 +79,7 @@ export function MainInfo() {
         router.reload();
       })
       .catch((error) => console.error("Reason for error: ", error.response));
-
-  }, [userData, imageSrc, router]);
+  }, [imageSrc, router]);
 
   // Function to convert Data URI to Blob
   // Data URI를 Blob으로 변환하는 함수
