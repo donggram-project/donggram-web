@@ -91,7 +91,11 @@ export default function ClubPage() {
             setClickedIds={setClickedDivision}
             setAll={setDivisionsAll}
           />
-          <BigCategory props="모집 중" onCategoryClick={handleCategoryClick} />
+          <BigCategory
+            props="모집 중"
+            onCategoryClick={handleCategoryClick}
+            field="division"
+          />
         </Department>
       </div>
       <Boarder />
