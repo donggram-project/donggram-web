@@ -126,25 +126,30 @@ export const ClubInfo = ({
   );
   const handleRecruitStartChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const changedDate = e.target.value;
+      const newStartDate = e.target.value;
       if (changedClub) {
-        const newRecruitDates = [...recruitDates];
-        newRecruitDates[0] = changedDate;
+        // 새로운 시작 날짜를 recruitDates 배열에 설정
+        const newRecruitDates = [newStartDate, recruitDates[1] || ""];
         setRecruitDates(newRecruitDates);
-        const changedDates = recruitDates[0] + "~" + recruitDates[1];
+
+        // changedClub의 recruitmentPeriod도 업데이트
+        const changedDates = newStartDate + "~" + (recruitDates[1] || "");
         setChangedClub({ ...changedClub, recruitmentPeriod: changedDates });
       }
     },
     [changedClub, recruitDates]
   );
+
   const handleRecruitEndChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const changedDate = e.target.value;
+      const newEndDate = e.target.value;
       if (changedClub) {
-        const newRecruitDates = [...recruitDates];
-        newRecruitDates[1] = changedDate;
+        // 새로운 끝나는 날짜를 recruitDates 배열에 설정
+        const newRecruitDates = [recruitDates[0] || "", newEndDate];
         setRecruitDates(newRecruitDates);
-        const changedDates = recruitDates[0] + "~" + recruitDates[1];
+
+        // changedClub의 recruitmentPeriod도 업데이트
+        const changedDates = (recruitDates[0] || "") + "~" + newEndDate;
         setChangedClub({ ...changedClub, recruitmentPeriod: changedDates });
       }
     },

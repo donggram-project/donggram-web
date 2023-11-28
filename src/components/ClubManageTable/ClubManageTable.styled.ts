@@ -40,7 +40,6 @@ export const TableTitle = styled.div`
   flex: 1;
 `;
 export const TitleRow = styled.div<{ isId?: boolean }>`
-  white-space: nowrap;
   font-size: 1.8rem;
   line-height: 110%;
   flex: 0.5;

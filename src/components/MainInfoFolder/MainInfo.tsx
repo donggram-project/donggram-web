@@ -74,9 +74,12 @@ export function MainInfo() {
         router.reload();
       })
       .catch((error) => console.error("Reason for error: ", error.response));
+
   }, [userData, imageSrc, router]);
 
   // Function to convert Data URI to Blob
+  // Data URI를 Blob으로 변환하는 함수
+
   function dataURItoBlob(dataURI: string) {
     const base64Index = dataURI.indexOf(";base64,");
 
