@@ -74,11 +74,27 @@ export function MainInfo() {
         router.reload();
       })
       .catch((error) => console.error("Reason for error: ", error.response));
-  }, [imageSrc, router]);
+
+  }, [userData, imageSrc, router]);
+
+  // Function to convert Data URI to Blob
   // Data URI를 Blob으로 변환하는 함수
+
   function dataURItoBlob(dataURI: string) {
-    const byteString = atob(dataURI.split(",")[1]);
-    const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
+    const base64Index = dataURI.indexOf(";base64,");
+
+    // Check if there is base64 part in the Data URI
+    if (base64Index === -1) {
+      // Handle if there is no base64 part
+      alert("이미지 형식을 다시 확인해주세요."); // 사용자에게 경고 메시지 표시
+      // 페이지 새로 고침
+      window.location.reload();
+      return; // 새로 고침 이후의 코드 실행을 막기 위해 반환
+    }
+
+    const byteString = atob(dataURI.substring(base64Index + 8));
+    const mimeString = dataURI.substring(5, base64Index);
+
     const ab = new ArrayBuffer(byteString.length);
     const ia = new Uint8Array(ab);
 

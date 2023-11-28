@@ -36,18 +36,12 @@ export const SaveButton = styled.button`
   font-size: 2rem;
   font-weight: 500;
   margin-top: 3rem;
-  margin-left: 3rem;
+  margin-left: 71rem;
   margin-bottom: 5rem;
   border-radius: 0.3rem;
   border: 0.2rem solid #84c6f5;
 `;
-export const CancelButton = styled(SaveButton)`
-  background-color: white;
-  color: black;
-  border-radius: 0.5rem;
-  border: 0.1rem solid #dde1e6;
-  margin-left: 57rem;
-`;
+
 export const TextCss = styled.div`
   width: 12.2rem;
   height: 3.1rem;

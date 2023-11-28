@@ -14,8 +14,8 @@ import {
   LabelText,
   Star,
   TextCss,
-  CancelButton,
 } from "./CreateClubBottomStyle";
+import router from "next/router";
 
 export function CreateClubBottom({ imageSrc }: any) {
   const [clubNameInput, setClubNameInput] = useState(""); //input란
@@ -44,21 +44,6 @@ export function CreateClubBottom({ imageSrc }: any) {
       alert("날짜를 다시 확인해주세요");
     }
   }, [recruitDateTo, recruitDateFrom, recruitDate]);
-
-  const onDelete = () => {
-    setClubIntroInput("");
-    setClubNameInput("");
-    setRecruitDateFrom("");
-    setRecruitDateTo("");
-    // 여기까지는 input란 지우기
-    setClubName("");
-    setCol("");
-    setMaj("");
-    setDep("");
-    setOnRecruit(false);
-    setRecruitDate("");
-    setClubIntroduction("");
-  };
 
   const onSubmit = useCallback(() => {
     if (recruitDate === " ~ ") {
@@ -97,8 +82,12 @@ export function CreateClubBottom({ imageSrc }: any) {
           "Content-Type": "multipart/form-data", // Content-Type must be set to this.
         },
       })
+      .then((response) => {
+        alert("동아리 생성 요청 성공!");
+        router.push("/");
+      })
       .catch((error) => {
-        alert("저장 실패");
+        alert("오류가 발생했습니다. 다시 시도해주세요.");
       });
   }, [clubName, col, dep, onRecruit, recruitDate, clubIntroduction, imageSrc]);
 
@@ -192,11 +181,8 @@ export function CreateClubBottom({ imageSrc }: any) {
         }}
       />
       <div>
-        <CancelButton>
-          <ButtonText onClick={onDelete}>취소</ButtonText>
-        </CancelButton>
         <SaveButton>
-          <ButtonText onClick={onSubmit}>저장</ButtonText>
+          <ButtonText onClick={onSubmit}>생성</ButtonText>
         </SaveButton>
       </div>
     </div>
