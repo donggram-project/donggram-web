@@ -31,18 +31,11 @@ export function CreateClubBottom({ imageSrc }: any) {
   const [clubIntroduction, setClubIntroduction] = useState(""); //동아리 소개 문구
 
   useEffect(() => {
-    //날짜 잘못설정하면 빠꾸치게하기
-    console.log("ㅡㅡㅡuseEffect To시작ㅡㅡㅡ");
-    console.log({ recruitDateFrom }); //추가확인
-    console.log({ recruitDateTo }); //추가확인
-    console.log({ recruitDate }); //추가확인
-
     const startDate = new Date(recruitDateFrom);
     const endDate = new Date(recruitDateTo);
 
     if (recruitDateFrom !== "" && recruitDateTo !== "") {
       setRecruitDate(recruitDateFrom + " ~ " + recruitDateTo); //dateFrom와 To에 값이 있을 때만 찐date값 설정하기
-      console.log({ recruitDate }); //추가확인
     }
     if (startDate > endDate) {
       setRecruitDateFrom("");
@@ -50,7 +43,6 @@ export function CreateClubBottom({ imageSrc }: any) {
       setRecruitDate("");
       alert("날짜를 다시 확인해주세요");
     }
-    console.log("ㅡㅡㅡuseEffect To끝ㅡㅡㅡ");
   }, [recruitDateTo, recruitDateFrom, recruitDate]);
 
   const onDelete = () => {
@@ -99,17 +91,6 @@ export function CreateClubBottom({ imageSrc }: any) {
     formData.append("newClubDto", blob); // 또는  formData.append("data", JSON.stringify(value)); // JSON 형식으로 파싱.(백엔드의 요청에 따라 전송방식이 달라진다.)
     // formData.append("newClubDto", JSON.stringify(value));
 
-    console.log("ㅡㅡㅡ제출ㅡㅡㅡ");
-    console.log({ clubName });
-    console.log({ col });
-    console.log({ maj });
-    console.log({ dep });
-    console.log({ isRecruitmentValue });
-    console.log({ recruitDate });
-    console.log({ clubIntroduction });
-    console.log("이미지 정보 : ", { imageSrc });
-    // 객체가 잘 저장되었는지 확인해보기
-
     customAxios //api post 예시
       .post("/clubs/new", formData, {
         headers: {
@@ -117,8 +98,7 @@ export function CreateClubBottom({ imageSrc }: any) {
         },
       })
       .catch((error) => {
-        console.log("저장 실패");
-        console.log(error);
+        alert("저장 실패");
       });
   }, [
     clubName,

@@ -13,6 +13,6 @@ html {
 }
 
 input:disabled {
-  background-color: #ccc;
+  background-color: #ececec;
   /* disabled 됐을 때 input란 안에 색깔 defalut값 */
 }

@@ -56,8 +56,17 @@ export const Star = styled.span`
 `;
 export const ClubImage = styled(Image)`
   margin-left: 5rem;
-  width: 14.2rem;
-  height: 16.7rem;
+  width: 20rem;
+  height: 23rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+`;
+export const ClubImageCss = styled.img`
+  margin-left: 5rem;
+  width: 20rem;
+  height: 23rem;
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -100,8 +109,8 @@ export const ImageDelete = styled.div`
   margin-top: 1rem;
 `;
 export const DeleteButton = styled.label`
-  margin-left: -3.5rem;
-  width: 6rem;
+  margin-left: -2.4rem;
+  width: 7.2rem;
   height: 2rem;
   padding-left: 1.1rem;
   flex-shrink: 0;
