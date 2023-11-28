@@ -62,7 +62,7 @@ export const SaveButton = styled.button`
   font-size: 2rem;
   font-weight: 500;
   margin-top: 3rem;
-  margin-left: 72rem;
+  margin-left: 75.5rem;
   margin-bottom: 5rem;
   border-radius: 3px;
   border: 2px solid #84c6f5;
@@ -120,8 +120,8 @@ export const PlaceholderImage = styled(Image)`
   // Add any additional styles for the placeholder image here
 `;
 export const DeleteButton = styled.label`
-  margin-left: -2.7rem;
-  width: 7.2rem;
+  margin-left: -3rem;
+  width: 6.6rem;
   height: 2rem;
   padding-left: 1.1rem;
   flex-shrink: 0;

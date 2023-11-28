@@ -109,8 +109,8 @@ export const ImageDelete = styled.div`
   margin-top: 1rem;
 `;
 export const DeleteButton = styled.label`
-  margin-left: -2.4rem;
-  width: 7.2rem;
+  margin-left: -3rem;
+  width: 6.6rem;
   height: 2rem;
   padding-left: 1.1rem;
   flex-shrink: 0;
