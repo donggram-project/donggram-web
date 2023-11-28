@@ -56,11 +56,6 @@ export function MainInfo() {
   }, [setLoginHeader, router]);
 
   const onSubmit = useCallback(() => {
-    console.log("Name = ", userData.memberName);
-    console.log("Student number = ", userData.studentId);
-    console.log("Major =", userData.major1);
-    console.log("Photo = ", imageSrc);
-
     const formData = new FormData();
 
     if (imageSrc) {
@@ -75,7 +70,7 @@ export function MainInfo() {
     customAxios
       .put(`/member`, formData, {})
       .then(() => {
-        console.log("put success");
+        alert("저장 성공!");
         router.reload();
       })
       .catch((error) => console.error("Reason for error: ", error.response));
@@ -95,22 +90,11 @@ export function MainInfo() {
   }
 
   useEffect(() => {
-    console.log("이름 = ", userData.memberName);
-    console.log("학번 = ", userData.studentId);
-    console.log("전공 =", userData.major1);
-    console.log("사진 = ", imageSrc);
-  }),
-    [userData];
-
-  useEffect(() => {
     customAxios
       .get(`/member`)
       .then((res) => {
         setUserData(res.data.data);
         setImageSrc(res.data.data.profileImage);
-
-        console.log(res.data.data);
-        console.log("불러오기 성공");
       })
       .catch((error) => console.error("에러:에러!!!!!!!!!!!!!!", error));
   }, [setUserData]);

@@ -97,8 +97,9 @@ export const DateSelectBox = styled.input`
   flex-shrink: 0;
   border-radius: 0.5rem;
   border: 0.1rem solid #959a9f;
-  background: #fff;
+  background: white;
   text-align: center;
+  margin-left: 2rem;
 `;
 export const DateFromToText = styled.span`
   color: #000;

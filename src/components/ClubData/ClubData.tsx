@@ -20,16 +20,19 @@ import {
 
 const ClubData = ({ clubData }: any) => {
   const onSubmit = useCallback(() => {
-    console.log(clubData.clubId);
-    customAxios
-      .post(`/clubs/${clubData.clubId}/join`)
-      .then((res) => {
-        alert("신청완료");
-      })
-      .catch((error) => {
-        alert("신청실패");
-        console.log(error);
-      });
+    if (clubData.recruitment === true) {
+      customAxios
+        .post(`/clubs/${clubData.clubId}/join`)
+        .then((res) => {
+          alert("신청이 완료되었습니다.");
+        })
+        .catch((error) => {
+          alert("신청이 실패했습니다.");
+          console.error(error);
+        });
+    } else {
+      alert("이 동아리는 모집 중이 아닙니다.");
+    }
   }, [clubData]);
   return (
     <>

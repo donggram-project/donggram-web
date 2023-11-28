@@ -18,8 +18,8 @@ import {
   ImageUpLoad,
   ImageDelete,
   DeleteButton,
+  ClubImageCss,
 } from "./CreateClubTopStyle";
-import { ClubImageCss } from "../MainInfoFolder/MainInfoStyle";
 
 export function CreateClubTop() {
   const [imageSrc, setImageSrc]: any = useState(null);
@@ -39,10 +39,7 @@ export function CreateClubTop() {
     setImageSrc(null);
   }, [setImageSrc]);
 
-  useEffect(() => {
-    console.log(imageSrc);
-  }),
-    [imageSrc];
+
   return (
     <PageContainer>
       <TopTextContainer>

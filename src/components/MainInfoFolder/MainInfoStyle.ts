@@ -120,8 +120,8 @@ export const PlaceholderImage = styled(Image)`
   // Add any additional styles for the placeholder image here
 `;
 export const DeleteButton = styled.label`
-  margin-left: -3.5rem;
-  width: 6rem;
+  margin-left: -2.7rem;
+  width: 7.2rem;
   height: 2rem;
   padding-left: 1.1rem;
   flex-shrink: 0;
