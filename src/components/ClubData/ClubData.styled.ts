@@ -56,7 +56,7 @@ export const GreyBorder = styled.div`
 export const ClubDetailExplain = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: -1.5rem;
+  margin-top: 1rem;
 `;
 
 export const ClubExplainTextGrey = styled.span`
@@ -73,14 +73,14 @@ export const ClubExplainTextBlack = styled(ClubExplainTextGrey)`
   margin-right: 6rem;
 `;
 export const RegisterButton = styled.button`
-  margin-left: 5rem;
+  margin-left: 10rem;
   color: white;
   background-color: #0090f9;
   width: 19.8rem;
   height: 5.2rem;
   font-size: 2rem;
   font-weight: 500;
-  margin-top: 6rem;
+  margin-top: 4.1rem;
 `;
 
 export const BottomExplainHeader = styled.div`
