@@ -75,7 +75,6 @@ export function MainInfo() {
     customAxios
       .put(`/member`, formData, {})
       .then(() => {
-        alert("저장 성공!");
         router.reload();
       })
       .catch((error) => console.error("Reason for error: ", error.response));

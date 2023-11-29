@@ -47,7 +47,7 @@ customAxios.interceptors.response.use(
       response: { status },
     } = error;
     //401 = 토큰 만료
-    if (status != 200) {
+    if (status === 401) {
       const originRequest = config;
       //refreshToken
       const refreshToken = getCookie("refreshToken");
