@@ -197,7 +197,7 @@ export const ClubInfo = ({
 
   useEffect(() => {
     customAxios
-      .get(`admin/clubs/${ClickedId}`)
+      .get(`admin/clubs/info/${ClickedId}`)
       .then((response) => {
         if (response.data.data.clubCreated == null) {
           response.data.data.clubCreated = "-";
